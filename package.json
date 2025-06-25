@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.13.0"
+  },
   "name": "buyandsell2",
   "type": "module",
   "version": "1.0.0",
