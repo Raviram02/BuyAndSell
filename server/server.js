@@ -8,20 +8,21 @@ import usersRoute from "./routes/usersRoute.js";
 import productsRoute from "./routes/productsRoutes.js";
 import bidsRoute from "./routes/bidsRoute.js";
 import notificationsRoute from "./routes/notificationsRoute.js";
-import cors from "cors";
+import path from "path";
+import cors from "cors"; 
 
 connectDB();
+
 const app = express();
 
 // ✅ CORS must come before routes
 app.use(cors({
   origin: [
-    "http://localhost:5000",
+    "http://localhost:5173",
     "https://buyandsell-frontend.onrender.com"
   ],
   credentials: true
 }));
-
 
 app.use(express.json());
 app.use("/api/users", usersRoute);
@@ -29,10 +30,15 @@ app.use("/api/products", productsRoute);
 app.use("/api/bids", bidsRoute);
 app.use("/api/notifications", notificationsRoute);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
-// import path from "path";
-// import { fileURLToPath } from "url";
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 // // Simulate __dirname
 // const __filename = fileURLToPath(import.meta.url);
@@ -45,11 +51,6 @@ const port = process.env.PORT || 5000;
 //     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 //   });
 // }
-
-app.use((req, res, next) => {
-  res.status(404).json({ message: "Route not found" });
-});
-
 
 app.listen(port, () => {
   console.log(`Node/Express Server started on port ${port}`);
