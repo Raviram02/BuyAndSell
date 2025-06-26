@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:5000",
+  "proxy": "https://buyandsell-lgmg.onrender.com",
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
