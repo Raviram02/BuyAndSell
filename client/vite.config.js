@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/': 'https://buyandsell-rm4u.onrender.com',
+      '/api': 'http://localhost:5000',
     },
   },
 });
