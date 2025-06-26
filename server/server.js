@@ -8,10 +8,21 @@ import usersRoute from "./routes/usersRoute.js";
 import productsRoute from "./routes/productsRoutes.js";
 import bidsRoute from "./routes/bidsRoute.js";
 import notificationsRoute from "./routes/notificationsRoute.js";
+import cors from "cors";
 
 connectDB();
-
 const app = express();
+
+// ✅ CORS must come before routes
+app.use(cors({
+  origin: [
+    "http://localhost:5000",
+    "https://buyandsell-frontend.onrender.com"
+  ],
+  credentials: true
+}));
+
+
 app.use(express.json());
 app.use("/api/users", usersRoute);
 app.use("/api/products", productsRoute);
