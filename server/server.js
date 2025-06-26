@@ -18,16 +18,17 @@ const app = express();
 
 const __dirname = path.resolve();
 
-// ✅ CORS must come before routes
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://buyandsell-frontend.onrender.com",
+      "http://localhost:5173", // local dev
+      "https://buyandsell-frontend.onrender.com", // your Render frontend (if still used)
+      "https://buy-and-sell-lime.vercel.app/", // ✅ your Vercel frontend
     ],
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 app.use("/api/users", usersRoute);
